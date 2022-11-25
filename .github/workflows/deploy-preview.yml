@@ -1,7 +1,7 @@
 name: Node.js CI
 
 on:
-  push:
+  pull_request:
     branches: ["main"]
 
 jobs:
@@ -54,6 +54,6 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting
+          args: hosting:channel:deploy ${{ github.sha }}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
