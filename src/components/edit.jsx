@@ -11,8 +11,10 @@ export default function Edit() {
     const { getPostById } = usePosts();
     
     useEffect(() => {
-        getPostById(id, setPost);
-    }, [getPostById, id]);
+        (async() => {
+            setPost(await getPostById());
+        })()
+    }, [getPostById, id]);  
 
     return (
         post && <CreateBlog blog={post} />

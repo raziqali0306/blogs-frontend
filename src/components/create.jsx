@@ -34,7 +34,7 @@ function CreateBlog({ blog }) {
                 createPost(title, body, tags);
             }
             else {
-                editPost(id, title, body, tags);
+                editPost(title, body, tags);
             }
         }
     }

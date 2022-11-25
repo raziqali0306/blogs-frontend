@@ -1,30 +1,25 @@
-import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 function usePosts() {
-
   const navigate = useNavigate();
+  const { id } = useParams();
 
-  function getAllPosts(setPosts) {
-    fetch(`${BASE_URL}/posts/`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-      })
-      .catch((err) => {
-        console.log(err);
-    })
-  }
+  const getAllPosts = useCallback(async () => {
+    const response = await fetch(`${BASE_URL}/posts/`);
+    const data = await response.json();
+    return data;
+  }, []);
 
-  function getPostById(id, setPost) {
-    fetch(`${BASE_URL}/posts/${id}`)
-      .then((res) => res.json())
-      .then((data) => setPost(data))
-      .catch((err) => console.log(err));
-  }
+  const getPostById = useCallback(async () => {
+    const response = await fetch(`${BASE_URL}/posts/${id}`);
+    const data = await response.json();
+    return data;
+  }, [id]);
 
-  function createPost(title, body, tags) {
-    fetch(`${BASE_URL}/posts/`, {
+  const createPost = useCallback(async (title, body, tags) => {
+    const response = await fetch(`${BASE_URL}/posts/`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -33,37 +28,27 @@ function usePosts() {
             title, body, tags
           }),
     })
-    .then((res) => res.json())
-    .then((res) => navigate(`/posts/${res.data.postId}`))
-    .catch((err) => console.log(err));
-  }
+    const data = await response.json();
+    navigate(`/posts/${data.data.postId}`)
+  }, [navigate]);
 
-  function editPost(id, title, body, tags) {
-    fetch(`${BASE_URL}/posts/${id}`, {
+  const editPost = useCallback(async (title, body, tags) => {
+    await fetch(`${BASE_URL}/posts/${id}`, {
         method: "PATCH",
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify({title, body, tags}),
     })
-    .then((res) => res.json())
-    .then((res) => {
-        navigate(`/posts/${id}`)
-    })
-    .catch((err) => console.log(err));
-  }
+    navigate(`/posts/${id}`)
+  }, [id, navigate]);
 
-  function deletePost(id) {
-    fetch(`${BASE_URL}/posts/${id}`, {
+  const deletePost = useCallback(async () => {
+    await fetch(`${BASE_URL}/posts/${id}`, {
       method: "DELETE",
     })
-    .then((data) => {
-      navigate('/');
-    }).catch((err) => {
-      alert("Failed to delete post");
-      console.log(err)
-    });
-  }
+    navigate('/');
+  }, [id, navigate]);
 
   return {
     getAllPosts,

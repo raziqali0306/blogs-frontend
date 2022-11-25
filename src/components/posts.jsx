@@ -12,7 +12,9 @@ function Posts() {
   const { getAllPosts } = usePosts();
 
   useEffect(() => {
-    getAllPosts(setPosts);
+    (async () => {
+      setPosts(await getAllPosts())
+    })()
   }, [getAllPosts]);
 
   return (

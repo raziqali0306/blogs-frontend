@@ -15,7 +15,9 @@ function Post() {
   const { getPostById, deletePost } = usePosts();
 
   useEffect(() => {
-    getPostById(id, setPost);
+    (async() => {
+        setPost(await getPostById());
+    })()
   }, [getPostById, id]);
 
   return (
@@ -83,7 +85,7 @@ function Post() {
             startIcon={<EditIcon />}
             >Edit</Button>
           <Button
-            onClick={() => deletePost(id)}
+            onClick={() => deletePost()}
             variant="contained"
             sx={{
               bgcolor: "red",
