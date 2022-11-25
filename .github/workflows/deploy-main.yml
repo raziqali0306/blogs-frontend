@@ -52,7 +52,7 @@ jobs:
     - name: build static assets
       run: npm run build --if-present
     - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
+      uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
