@@ -53,11 +53,24 @@ function usePosts() {
     .catch((err) => console.log(err));
   }
 
+  function deletePost(id) {
+    fetch(`${BASE_URL}/posts/${id}`, {
+      method: "DELETE",
+    })
+    .then((data) => {
+      navigate('/');
+    }).catch((err) => {
+      alert("Failed to delete post");
+      console.log(err)
+    });
+  }
+
   return {
     getAllPosts,
     getPostById,
     createPost,
-    editPost
+    editPost,
+    deletePost
   }
 }
 

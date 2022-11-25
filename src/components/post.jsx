@@ -5,7 +5,6 @@ import { Box } from '@mui/system';
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import usePosts from '../hooks/use-posts';
-import { BASE_URL } from "../utils/constants";
 
 function Post() {
   const { id } = useParams();
@@ -13,23 +12,11 @@ function Post() {
 
   const navigate = useNavigate();
 
-  const { getPostById } = usePosts();
+  const { getPostById, deletePost } = usePosts();
 
   useEffect(() => {
     getPostById(id, setPost);
   }, [id]);
-
-  const deletePost = () => {
-    fetch(`${BASE_URL}/posts/${id}`, {
-      method: "DELETE",
-    })
-    .then((data) => {
-      navigate('/');
-    }).catch((err) => {
-      alert("Failed to delete post");
-      console.log(err)
-    });
-  }
 
   return (
     <>
@@ -96,7 +83,7 @@ function Post() {
             startIcon={<EditIcon />}
             >Edit</Button>
           <Button
-            onClick={deletePost}
+            onClick={() => deletePost(id)}
             variant="contained"
             sx={{
               bgcolor: "red",
