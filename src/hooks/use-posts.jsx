@@ -9,19 +9,25 @@ function usePosts() {
     fetch(`${BASE_URL}/posts/`, {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+          'Content-Type': 'application/json',
         },
-      body: JSON.stringify({
-          title, body, tags
-        }),
+        body: JSON.stringify({
+            title, body, tags
+          }),
     })
     .then((res) => res.json())
     .then((res) => navigate(`/posts/${res.data.postId}`))
     .catch((err) => console.log(err));
   }
 
+  function editPost(postId, title, body, tags) {
+    // TODO
+  }
+
+
   return {
     createPost,
+    editPost
   }
 }
 

@@ -31,20 +31,19 @@ function CreateBlog({blog, cancel, refreshPost}) {
                 createPost(title, body, tags);
             }
             else {
-                console.log("requestBody");
-                editHandler(requestBody);
+                editHandler(title, body, tags);
             }
         }
     }
         
     
-    const editHandler = (requestBody) => {
+    const editHandler = (title, body, tags) => {
         fetch(`${BASE_URL}/posts/${blog.postId}`, {
             method: "PATCH",
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(requestBody),
+            body: JSON.stringify({title, body, tags}),
         })
         .then((res) => res.json())
             .then((res) => {

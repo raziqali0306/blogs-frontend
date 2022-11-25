@@ -95,7 +95,9 @@ function Post() {
               width={"100%"}
               >
               <Button
-                onClick={() => setEnableEdit(prev => !prev)}
+                onClick={() => {
+                  navigate(`/posts/${id}/edit`);
+                }}
                 variant="contained"
                 sx={(theme) => ({
                   bgcolor: theme.palette.secondary.main,
