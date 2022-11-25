@@ -3,23 +3,16 @@ import { Box, Button, Card, CardActions, CardContent, Typography } from "@mui/ma
 import { Stack } from "@mui/system";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils/constants";
+import usePosts from '../hooks/use-posts';
 
 function Posts() {
   const [posts, setPosts] = useState([]);
 
   const navigate = useNavigate();
+  const { getAllPosts } = usePosts();
 
   useEffect(() => {
-    fetch(`${BASE_URL}/posts/`)
-      .then((res) => res.json())
-      .then((data) => {
-        setPosts(data);
-      })
-      .catch((err) => {
-        console.log(err);
-    })
-    
+    getAllPosts(setPosts);
   }, []);
 
   return (
