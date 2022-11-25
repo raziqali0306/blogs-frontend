@@ -5,6 +5,17 @@ function usePosts() {
 
   const navigate = useNavigate();
 
+  function getAllPosts(setPosts) {
+    fetch(`${BASE_URL}/posts/`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPosts(data);
+      })
+      .catch((err) => {
+        console.log(err);
+    })
+  }
+
   function getPostById(id, setPost) {
     fetch(`${BASE_URL}/posts/${id}`)
       .then((res) => res.json())
@@ -43,6 +54,7 @@ function usePosts() {
   }
 
   return {
+    getAllPosts,
     getPostById,
     createPost,
     editPost
