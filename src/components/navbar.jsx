@@ -1,8 +1,6 @@
 import CreateIcon from '@mui/icons-material/Create';
 import {
-  AppBar,
-  Box,
-  Button,
+  AppBar, Button,
   styled,
   Toolbar,
   Typography

@@ -16,7 +16,7 @@ function Post() {
 
   useEffect(() => {
     getPostById(id, setPost);
-  }, [id]);
+  }, [getPostById, id]);
 
   return (
     <>

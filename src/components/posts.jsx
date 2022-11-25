@@ -13,7 +13,7 @@ function Posts() {
 
   useEffect(() => {
     getAllPosts(setPosts);
-  }, []);
+  }, [getAllPosts]);
 
   return (
     <Stack sx={{

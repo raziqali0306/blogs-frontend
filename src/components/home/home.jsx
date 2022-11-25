@@ -1,13 +1,13 @@
 
-import { Box, Button, styled, Typography } from '@mui/material';
+import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
+import { Box, styled, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import React from 'react';
 import { StyledStack } from '../customComponents/styledComponents';
+import Footer from '../footer';
+import Posts from '../posts';
 import Collection from './collections';
 import Intro from './intro';
-import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
-import Posts from '../posts';
-import Footer from '../footer';
 
 const StyledContainer = styled(Box)(({ theme }) => ({
     paddingBottom: "10vh",

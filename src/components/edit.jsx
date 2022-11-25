@@ -12,7 +12,7 @@ export default function Edit() {
     
     useEffect(() => {
         getPostById(id, setPost);
-    }, [id]);
+    }, [getPostById, id]);
 
     return (
         post && <CreateBlog blog={post} />
