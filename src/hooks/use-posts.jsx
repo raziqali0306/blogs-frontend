@@ -27,8 +27,19 @@ function usePosts() {
     .catch((err) => console.log(err));
   }
 
-  function editPost(postId, title, body, tags) {
-    // TODO
+  function editPost(id, title, body, tags) {
+    fetch(`${BASE_URL}/posts/${id}`, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({title, body, tags}),
+    })
+    .then((res) => res.json())
+    .then((res) => {
+        navigate(`/posts/${id}`)
+    })
+    .catch((err) => console.log(err));
   }
 
   return {

@@ -2,26 +2,29 @@ import { Cancel } from "@mui/icons-material";
 import SaveIcon from '@mui/icons-material/Save';
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useRef, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import usePosts from "../hooks/use-posts";
-import { BASE_URL } from "../utils/constants";
 
-function CreateBlog({blog, cancel, refreshPost}) {
-  const titleRef = useRef(null);
-  const bodyRef = useRef(null);
-  const tagsRef = useRef(null);
-  const { createPost } = usePosts();
+function CreateBlog({ blog }) {
+    const titleRef = useRef(null);
+    const bodyRef = useRef(null);
+    const tagsRef = useRef(null);
 
-  const [title, setTitle] = useState(blog?.title || '');
-  const [body, setBody] = useState(blog?.body || '');
-  const [tags, setTags] = useState(blog?.tags || []);
+    const { id } = useParams();
+        
+    const { createPost, editPost } = usePosts();
+    const navigate = useNavigate();
+        
+    const [title, setTitle] = useState(blog?.title || '');
+    const [body, setBody] = useState(blog?.body || '');
+    const [tags, setTags] = useState(blog?.tags || []);
 
-  const handleDelete = (value) => {
-    const newtags = tags.filter((val) => val !== value);
-    setTags(newtags);
-  };
+    const handleDelete = (value) => {
+        const newtags = tags.filter((val) => val !== value);
+        setTags(newtags);
+    };
 
     const actionHandler = () => {
-        let requestBody;
         if (titleRef.current.value === "") {
             titleRef.current.focus();
         } else if (bodyRef.current.value === "") {
@@ -31,27 +34,9 @@ function CreateBlog({blog, cancel, refreshPost}) {
                 createPost(title, body, tags);
             }
             else {
-                editHandler(title, body, tags);
+                editPost(id, title, body, tags);
             }
         }
-    }
-        
-    
-    const editHandler = (title, body, tags) => {
-        fetch(`${BASE_URL}/posts/${blog.postId}`, {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({title, body, tags}),
-        })
-        .then((res) => res.json())
-            .then((res) => {
-            console.log("here")
-            refreshPost();
-            cancel();
-        })
-        .catch((err) => console.log(err));
     }
     
     const addTag = (e) => {
@@ -114,7 +99,9 @@ function CreateBlog({blog, cancel, refreshPost}) {
                                 type="submit"
                                 color="secondary"
                                 sx={{ width: "fit-content" }}
-                                onClick={cancel}
+                                onClick={() => {
+                                    navigate(`/posts/${id}`)
+                                }}
                             >
                             Cancel
                             </Button>
