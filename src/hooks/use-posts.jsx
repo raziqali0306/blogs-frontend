@@ -50,12 +50,20 @@ function usePosts() {
     navigate('/');
   }, [id, navigate]);
 
+  const getTags = useCallback(async () => {
+    const response = await fetch(`${BASE_URL}/posts/tags`);
+    const data = await response.json();
+    console.log(data);
+    return data;
+  }, [])
+
   return {
     getAllPosts,
     getPostById,
     createPost,
     editPost,
-    deletePost
+    deletePost,
+    getTags
   }
 }
 
