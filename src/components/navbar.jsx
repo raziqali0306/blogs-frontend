@@ -41,7 +41,7 @@ function Navbar() {
               onClick={() => {
                 navigate('/create');
               }}
-            >Create</Button>
+            >New</Button>
           </StyledBox>
         </StyledToolBar>
       </AppBar>
