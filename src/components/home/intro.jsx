@@ -1,7 +1,7 @@
-import { Box, Button, styled, TextField, Typography } from '@mui/material'
-import React from 'react'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import gif from '../../assests/blogger.gif';
+import { Box, Button, styled, TextField, Typography } from '@mui/material';
+import React from 'react';
+import blogger from '../../assests/blogger.gif';
 
 
 const StyledBox = styled(Box)({
@@ -39,7 +39,7 @@ export default function Intro() {
                 </Box>
             </StyledBox>
             <StyledBox marginLeft={18}>
-                <img src={gif} alt="" />
+                <img src={blogger} alt="" />
             </StyledBox>
         </>
   )
