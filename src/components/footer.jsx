@@ -7,8 +7,8 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Box, Button, Divider, styled, TextField, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import React from 'react';
+import mailBox from '../assests/postbox.svg';
 import { StyledBox } from './customComponents/styledComponents';
-import mailBox from '../assests/postbox.svg'
 
 const FooterText = styled(Typography)({
     fontSize: 14,

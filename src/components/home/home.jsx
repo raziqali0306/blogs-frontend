@@ -2,9 +2,9 @@
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import { Box, styled, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import usePosts from '../../hooks/use-posts';
 import { StyledStack } from '../customComponents/styledComponents';
-import Footer from '../footer';
 import Posts from '../posts';
 import Collection from './collections';
 import Intro from './intro';
@@ -17,6 +17,26 @@ const StyledContainer = styled(Box)(({ theme }) => ({
 }))
 
 export default function Home() {
+
+    
+    const { getAllPosts } = usePosts();
+
+    const [selectedTag, setSelectedTag] = useState(null);
+    const [posts, setPosts] = useState([]);
+
+    const getPosts = () => {
+        if (selectedTag === null) {
+            return posts;
+        }
+        return posts.filter((post) => post.tags.includes(selectedTag));
+    }
+
+    useEffect(() => {
+    (async () => {
+      setPosts(await getAllPosts())
+    })()
+  }, [getAllPosts]);
+
     return (
         <>
             <Box sx={(theme) => ({backgroundColor: theme.palette.primary.extraLight, mb: "100px"})}>
@@ -24,7 +44,7 @@ export default function Home() {
                     <StyledContainer position={'relative'}>
                         <Intro />
                     </StyledContainer>
-                    <Collection />
+                    <Collection setSelectedTag={setSelectedTag} selectedTag={selectedTag} />
                 </Stack>
             </Box>
             <Box maxWidth="lg" mx="auto" marginBottom={"100px"}>
@@ -39,9 +59,8 @@ export default function Home() {
                         <HorizontalRuleIcon />
                     </Stack>
                 </StyledStack>
-                <Posts />
+                <Posts posts={getPosts()} />
             </Box>
-            <Footer />
         </>
   )
 }

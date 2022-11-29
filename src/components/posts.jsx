@@ -1,21 +1,10 @@
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Box, Button, Card, CardActions, CardContent, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import usePosts from '../hooks/use-posts';
 
-function Posts() {
-  const [posts, setPosts] = useState([]);
-
+function Posts({posts}) {
   const navigate = useNavigate();
-  const { getAllPosts } = usePosts();
-
-  useEffect(() => {
-    (async () => {
-      setPosts(await getAllPosts())
-    })()
-  }, [getAllPosts]);
 
   return (
     <Stack sx={{
@@ -23,7 +12,7 @@ function Posts() {
       flexDirection: "row",
       flexWrap: "wrap",
       gap: 5,
-      mb: "40px"
+      mb: "40px",
     }}>
       {
         posts.map((post) => (
@@ -31,7 +20,7 @@ function Posts() {
             width: "30%",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between"
+            justifyContent: "space-between",
           }}>
             <CardContent>
               <Typography
@@ -80,7 +69,6 @@ function Posts() {
           </Card>
         ))
       }
-      
     </Stack>
   );
 }

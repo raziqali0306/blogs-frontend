@@ -19,6 +19,10 @@ function Post() {
         setPost(await getPostById());
     })()
   }, [getPostById, id]);
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   return (
     <>
@@ -61,7 +65,7 @@ function Post() {
             }
           </Stack>
         </Box>
-        <Typography variant="body1" marginBottom={6}>{post?.body}</Typography>
+        <Typography variant="body1" marginBottom={6} whiteSpace={'pre-wrap'}>{post?.body}</Typography>
         <Stack
           width={"100%"}
           direction={"row"}
@@ -72,6 +76,7 @@ function Post() {
           direction={'row'}
           justifyContent="space-between"
           width={"100%"}
+          marginBottom={8}
           >
           <Button
             onClick={() => {

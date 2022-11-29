@@ -1,23 +1,8 @@
-import { createContext, useState } from "react";
-
-class ApiService {
-    
-    async getPosts() {
-        this.getRequest("getAllPosts")
-    }
-
-
-}
-
-
-
-
+import { createContext } from "react";
 
 const AppContext = createContext({});
 
 export default function AppWrapper({ children }) {
-
-
 
     return (
         <AppContext.Provider

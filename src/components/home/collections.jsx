@@ -7,7 +7,7 @@ import { StyledStack } from '../customComponents/styledComponents';
 import Tags from '../tags';
 
 
-export default function Collection() {
+export default function Collection({selectedTag, setSelectedTag}) {
 
     const { getTags } = usePosts();
 
@@ -34,7 +34,9 @@ export default function Collection() {
                 </Stack>
                 <Button color='text' endIcon={<ChevronRightIcon />} >see all categories</Button>
             </StyledStack>
-            <Tags tags={tags}/>
+            <Tags tags={tags} selectedTag={selectedTag} selectTag={(tag) => {
+                selectedTag === tag ? setSelectedTag(null) : setSelectedTag(tag)
+            }} />
       </Box>
   )
 }

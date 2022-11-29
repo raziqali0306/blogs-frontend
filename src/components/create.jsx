@@ -1,7 +1,7 @@
 import { Cancel } from "@mui/icons-material";
 import SaveIcon from '@mui/icons-material/Save';
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import usePosts from "../hooks/use-posts";
 
@@ -44,6 +44,11 @@ function CreateBlog({ blog }) {
         setTags([...tags, tagsRef.current.value]);
         tagsRef.current.value = "";
     };
+
+    
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
   
     return (
         <Stack
@@ -54,8 +59,9 @@ function CreateBlog({ blog }) {
             textAlign="center"
             maxWidth={"lg"}
             mx="auto"
+            minHeight={'85vh'}
         >
-            <Typography variant="h4" fontWeight={800} gutterBottom>{blog ? 'Edit' : 'Create'} Post</Typography>
+            <Typography variant="h4" fontWeight={800} gutterBottom>{blog ? 'Edit' : 'Create'}Post</Typography>
             <TextField value={title} onChange={(e) => setTitle(e.target.value)} variant="standard" label="Title" inputRef={titleRef} fullWidth></TextField>
             <TextField value={body} onChange={(e) => setBody(e.target.value)} variant="standard" label="Body" fullWidth inputRef={bodyRef} sx={{ mb: 2 }} multiline maxRows={12}></TextField>
             <form onSubmit={addTag}>
