@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import { Route, Routes } from 'react-router-dom';
 import CreateBlog from './components/create';
 import Edit from './components/edit';
+import Footer from './components/footer';
 import Home from './components/home/home';
 import Navbar from './components/navbar';
 import Post from './components/post';
@@ -18,6 +19,7 @@ function App() {
           <Route path='/create' element={<CreateBlog />} />
         </Routes>
       </Box>
+      <Footer />
     </>
   );
 }
