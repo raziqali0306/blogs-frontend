@@ -1,6 +1,7 @@
 
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
-import { Box, styled, Typography } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
+import { Box, InputAdornment, styled, TextField, Typography } from '@mui/material';
 import { Stack } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import usePosts from '../../hooks/use-posts';
@@ -23,13 +24,19 @@ export default function Home() {
 
     const [selectedTag, setSelectedTag] = useState(null);
     const [posts, setPosts] = useState([]);
+    const [filteredPosts, setFilteredPosts] = useState([]);
+    const [searchText, setSearchText] = useState('');
 
-    const getPosts = () => {
-        if (selectedTag === null) {
-            return posts;
+    useEffect(() => {
+        let filteredPosts = [...posts];
+        if (selectedTag !== null) {
+            filteredPosts = filteredPosts.filter((post) => post.tags.includes(selectedTag));
         }
-        return posts.filter((post) => post.tags.includes(selectedTag));
-    }
+        if (searchText.length >= 3) {
+            filteredPosts = filteredPosts.filter((post) => (post.title.toLowerCase().includes(searchText.toLowerCase()) || post.body.toLowerCase().includes(searchText.toLowerCase())));
+        }
+        setFilteredPosts(filteredPosts)
+    }, [posts, searchText, selectedTag])
 
     useEffect(() => {
     (async () => {
@@ -55,11 +62,31 @@ export default function Home() {
                         alignItems: "center",
                         gap: "5px"
                     }}>
-                        <Typography variant='h6' fontWeight={600} >Blogs</Typography>
+                        <Typography variant='h6' fontWeight={600}>Blogs</Typography>
                         <HorizontalRuleIcon />
                     </Stack>
+                    <Stack
+                        direction={'row'}
+                        width={"25%"}
+                    >
+                        <TextField
+                            fullWidth
+                            size='small'
+                            placeholder='Search here...'
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <SearchIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                            onChange={(e) => {
+                                setSearchText(e.target.value)
+                            }}
+                        />
+                    </Stack>
                 </StyledStack>
-                <Posts posts={getPosts()} />
+                <Posts posts={filteredPosts} />
             </Box>
         </>
   )
