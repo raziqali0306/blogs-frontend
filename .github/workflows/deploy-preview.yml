@@ -51,9 +51,35 @@ jobs:
         with:
           name: build
           path: build
+
+      - name: example echos...
+        run: echo "steps"
+      - run: echo ${{ steps }}
+      - run: echo "steps.step_id"
+      - run: echo ${{ steps.step_id }}
+      - run: echo "steps.step_id.outputs"
+      - run: echo ${{ steps.step_id.outputs }}
+      - run: echo "steps.step_id.outputs.url_output"
+      - run: echo ${{ steps.step_id.outputs.url_output }}
+      - run: echo "steps.step_id.outcome"
+      - run: echo ${{ steps.step_id.outcome }}
+
+      - run: echo "JOBS"
+      - run: echo ${{ job }}
+      - run: echo "job.container"
+      - run: echo ${{ job.container }}
+      - run: echo "job.container.id"
+      - run: echo ${{ job.container.id }}
+      - run: echo "job.container.network"
+      - run: echo ${{ job.container.network }}
+      - run: echo "job.services"
+      - run: echo ${{ job.services }}
+      - run: echo "job.status"
+      - run: echo ${{ job.status }}
+
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: hosting:channel:deploy ${{ github.ref_name }}
+          args: hosting:channel:deploy ${{ steps.step_id.outputs.url_output }}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
