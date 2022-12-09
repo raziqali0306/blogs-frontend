@@ -3,6 +3,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAppContext } from "../context/core";
 import usePosts from "../hooks/use-posts";
 
 function CreateBlog({ blog }) {
@@ -11,9 +12,10 @@ function CreateBlog({ blog }) {
     const tagsRef = useRef(null);
 
     const { id } = useParams();
-        
+    
     const { createPost, editPost } = usePosts();
     const navigate = useNavigate();
+    const appContext = useAppContext();
         
     const [title, setTitle] = useState(blog?.title || '');
     const [body, setBody] = useState(blog?.body || '');
@@ -47,8 +49,9 @@ function CreateBlog({ blog }) {
 
     
     useEffect(() => {
+        if (appContext?.userId === '' || appContext?.userId === null) navigate('/sign');
         window.scrollTo(0, 0);
-    }, [])
+    }, [appContext?.userId, navigate])
   
     return (
         <Stack
