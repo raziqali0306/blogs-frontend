@@ -59,7 +59,7 @@ function Sign() {
                             justifyContent: "center",
                             borderRadius: "80% / 10%",
                             boxShadow: "6px 6px 24px gray",
-                            transition: "all 1s cubic-bezier(0.42, 0, 0.73, 1.2)",
+                            transition: "all 1s cubic-bezier(0.24,-0.05, 0.53, 1.44)",
                         })}
                     >
                         <SignIn />

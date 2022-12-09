@@ -92,7 +92,10 @@ function Post() {
                   Edit
                 </Button>
                 <Button
-                  onClick={() => deletePost()}
+                  onClick={() => {
+                    deletePost()
+                    navigate('/')
+                  }}
                   variant="contained"
                   sx={{
                     bgcolor: "red",

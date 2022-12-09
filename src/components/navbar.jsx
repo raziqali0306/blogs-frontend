@@ -1,5 +1,4 @@
 import CreateIcon from '@mui/icons-material/Create';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import LoginIcon from '@mui/icons-material/Login';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import {
@@ -43,7 +42,7 @@ function Navbar() {
                   <Button
                     color="secondary"
                     size="small"
-                    variant="contained"
+                    variant="outlined"
                     endIcon={<CreateIcon fontSize="small" />}
                     onClick={() => {
                       navigate('/create');
@@ -58,38 +57,53 @@ function Navbar() {
                       menu.style.visibility = (menu.style.visibility === 'hidden' || menu.style.visibility === '') ? 'visible' : 'hidden'
                     }}
                   >
-                    <KeyboardArrowDownIcon
-                      color="secondary"
-                      sx={{
-                        height: "1.725rem",
-                        width: "1.725rem",
-                      }}
-                    />
                     <PersonOutlineIcon
                       color="secondary"
-                      sx={{
-                        height: "1.825rem",
-                        width: "1.825rem",
-                      }}
+                      sx={(theme) => ({
+                        border: `2px solid ${theme.palette.secondary.main}`,
+                        background: theme.palette.secondary.main,
+                        borderRadius: "50vh",
+                        padding: "2px",
+                        height: "1.6rem",
+                        width: "1.6rem",
+                        color: 'white',
+                        boxShadow: "1px 1px 3px gray",
+                        mt: "4px",
+                      })}
                     />
                     <Stack
                       className="navbar-toggle-menu"
                       sx={(theme) => ({
                         position: "absolute",
                         top: "101%",
+                        minWidth: "100px",
                         px: 2.5,
-                        py: 1.2,
+                        py: 2.4,
                         right: "2%",
                         backgroundColor: theme.palette.primary.extraLight,
                         boxShadow: `4px 4px 12px ${theme.palette.primary.main}`,
                         borderRadius: "8px",
-                        visibility: "hidden"
+                        visibility: "hidden",
+                        gap: 1.8,
                       })}
                     >
                       <Typography
                         variant='body2'
+                        onClick={() => navigate('/my-blogs')}
+                      >
+                        My Blogs
+                      </Typography>
+                      <Typography
+                        variant='body2'
+                        sx={{
+                          '&hover': {
+                            backgroundColor: "primary"
+                          }
+                        }}
                         onClick={() => appContext.clearLoginDetails()}
-                      >Logout</Typography>
+                      >
+                        Logout
+                      </Typography>
                     </Stack>
                   </Box>
                 </>

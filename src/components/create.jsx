@@ -2,7 +2,7 @@ import { Cancel } from "@mui/icons-material";
 import SaveIcon from '@mui/icons-material/Save';
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../context/core";
 import usePosts from "../hooks/use-posts";
 
@@ -10,8 +10,6 @@ function CreateBlog({ blog }) {
     const titleRef = useRef(null);
     const bodyRef = useRef(null);
     const tagsRef = useRef(null);
-
-    const { id } = useParams();
     
     const { createPost, editPost } = usePosts();
     const navigate = useNavigate();
@@ -109,7 +107,7 @@ function CreateBlog({ blog }) {
                                 color="secondary"
                                 sx={{ width: "fit-content" }}
                                 onClick={() => {
-                                    navigate(`/posts/${id}`)
+                                    navigate(-1)
                                 }}
                             >
                             Cancel

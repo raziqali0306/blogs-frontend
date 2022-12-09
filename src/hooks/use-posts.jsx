@@ -15,6 +15,19 @@ function usePosts() {
     return data;
   }, []);
 
+  const getMyPosts = useCallback(async () => {
+    const access_token = appContext.accessToken;
+    const response = await fetch(`${BASE_URL}/posts/myposts`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({access_token}),
+    });
+    const data = await response.json();
+    return data.data;
+  }, [appContext.accessToken]);
+
   const getPostById = useCallback(async () => {
     const response = await fetch(`${BASE_URL}/posts/${id}`);
     const data = await response.json();
@@ -53,9 +66,9 @@ function usePosts() {
     }
   }, [appContext.accessToken, id, navigate]);
   
-  const deletePost = useCallback(async () => {
+  const deletePost = useCallback(async (postId = id) => {
     const access_token = appContext.accessToken;
-    await fetch(`${BASE_URL}/posts/${id}`, {
+    await fetch(`${BASE_URL}/posts/${postId}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',
@@ -64,8 +77,7 @@ function usePosts() {
         access_token
       })
     })
-    navigate('/');
-  }, [appContext.accessToken, id, navigate]);
+  }, [appContext.accessToken, id]);
 
   const getTags = useCallback(async () => {
     const response = await fetch(`${BASE_URL}/posts/tags`);
@@ -79,7 +91,8 @@ function usePosts() {
     createPost,
     editPost,
     deletePost,
-    getTags
+    getTags,
+    getMyPosts
   }
 }
 

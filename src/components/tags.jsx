@@ -25,6 +25,7 @@ export default function Tags({ tags, selectTag, selectedTag }) {
                             borderRadius: 4,
                             textTransform: "capitalize",
                             boxShadow: `4px 4px 4px 4px ${theme.palette.primary.light}`,
+                            transition: "all 0.2s ease-in-out"
                         },
                         selectedTag === tag ?
                         {
