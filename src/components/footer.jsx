@@ -43,10 +43,12 @@ export default function Footer() {
                     <Button variant="contained" color='secondary' size={'small'} >Subscribe</Button>
                 </Box>
             </Stack>
-            <Box sx={(theme) => ({
-                bgcolor: theme.palette.primary.light,
-                padding: "20px"
-            })}>
+            <Box
+                sx={(theme) => ({
+                    bgcolor: theme.palette.primary.light,
+                    padding: "20px"
+                })}
+            >
                 <Box
                     marginTop={4}
                     maxWidth={"lg"}

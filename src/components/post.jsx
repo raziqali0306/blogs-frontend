@@ -4,6 +4,7 @@ import { Button, Divider, Stack, Typography } from "@mui/material";
 import { Box } from '@mui/system';
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAppContext } from '../context/core';
 import usePosts from '../hooks/use-posts';
 
 function Post() {
@@ -11,6 +12,7 @@ function Post() {
   const [post, setPost] = useState(null);
 
   const navigate = useNavigate();
+  const appContext = useAppContext();
 
   const { getPostById, deletePost } = usePosts();
 
@@ -65,39 +67,44 @@ function Post() {
             }
           </Stack>
         </Box>
-        <Typography variant="body1" marginBottom={6} whiteSpace={'pre-wrap'}>{post?.body}</Typography>
-        <Stack
-          width={"100%"}
-          direction={"row"}
-          justifyContent={'space-between'}
-          >
-        </Stack>
+        <Typography variant="body1" marginBottom={10} whiteSpace={'pre-wrap'}>{post?.body}</Typography>
+        <Typography variant='body2'>Publised on: { new Date(post?.createdAt).toLocaleDateString() } | { new Date(post?.createdAt).toLocaleTimeString() }</Typography>
         <Stack
           direction={'row'}
           justifyContent="space-between"
           width={"100%"}
           marginBottom={8}
-          >
-          <Button
-            onClick={() => {
-              navigate(`/posts/${id}/edit`);
-            }}
-            variant="contained"
-            sx={(theme) => ({
-              bgcolor: theme.palette.secondary.main,
-              color: "white"
-            })}
-            startIcon={<EditIcon />}
-            >Edit</Button>
-          <Button
-            onClick={() => deletePost()}
-            variant="contained"
-            sx={{
-              bgcolor: "red",
-              color: "white"
-            }}
-            startIcon={<DeleteIcon />}
-            >Delete</Button>
+        >
+          {
+            appContext?.userId === post?.author ?
+              <>
+                <Button
+                  onClick={() => {
+                    navigate(`/posts/${id}/edit`);
+                  }}
+                  variant="contained"
+                  sx={(theme) => ({
+                    bgcolor: theme.palette.secondary.main,
+                    color: "white"
+                  })}
+                  startIcon={<EditIcon />}
+                >
+                  Edit
+                </Button>
+                <Button
+                  onClick={() => deletePost()}
+                  variant="contained"
+                  sx={{
+                    bgcolor: "red",
+                    color: "white"
+                  }}
+                  startIcon={<DeleteIcon />}
+                >
+                  Delete
+                </Button>
+              </>
+            :null
+          }
         </Stack>
       </Stack>
     </>

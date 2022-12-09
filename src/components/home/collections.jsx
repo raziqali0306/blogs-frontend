@@ -21,7 +21,7 @@ export default function Collection({selectedTag, setSelectedTag}) {
     
 
     return (
-        <Box paddingBottom={"46px"}>
+        <Box paddingBottom={"46px"} className="reveal">
             <StyledStack>
                 <Stack sx={{
                     display: "flex",

@@ -19,5 +19,8 @@ export const theme = createTheme({
         text: {
             main:"#2B2C34"
         },
+        common: {
+            main: "#fff"
+        }
     }
 })

@@ -26,18 +26,18 @@ export default function Tags({ tags, selectTag, selectedTag }) {
                             textTransform: "capitalize",
                             boxShadow: `4px 4px 4px 4px ${theme.palette.primary.light}`,
                         },
-                            selectedTag === tag ?
-                                {
-                                    bgcolor: theme.palette.secondary.main,
-                                    scale: '1.09',
-                                    color: "white",
-                                } : {
-                                    "&:hover": {
-                                        bgcolor: theme.palette.secondary.main,
-                                        scale: '1.09',
-                                        color: "white",
-                                    }
-                                }
+                        selectedTag === tag ?
+                        {
+                            bgcolor: theme.palette.secondary.main,
+                            scale: '1.09',
+                            color: "white",
+                        } : {
+                            "&:hover": {
+                                bgcolor: theme.palette.secondary.main,
+                                scale: '1.09',
+                                color: "white",
+                            }
+                        }
                         )}
                         onClick={() => selectTag(tag)}
                     >

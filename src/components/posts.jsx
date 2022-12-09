@@ -27,13 +27,16 @@ function Posts({ posts }) {
             <Typography variant='h6' color='primary' mt={'-52px'}>No posts found...</Typography>
           </Box>  
           :
-          posts.map((post) => (
-            <Card sx={{
-              width: "30%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between"
-            }}>
+          posts.map((post, index) => (
+            <Card
+              key={index}
+              sx={{
+                width: "30%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between"
+              }}
+            >
               <CardContent>
                 <Typography
                   variant="h5"
@@ -51,8 +54,9 @@ function Posts({ posts }) {
                   gap: 1,
                 }}>
                   {
-                    post.tags.map(tag => (
+                    post.tags.map((tag, index) => (
                       <Box
+                        key={index}
                         sx={(theme) => ({
                           px: 2,
                           py: 0.9,
