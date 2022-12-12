@@ -17,6 +17,7 @@ function MyBlogs() {
         (async () => {
             setPosts(await getMyPosts());
         })();
+        window.scrollTo(0, 0);
         document.querySelector('.reveal.intro').classList.add('active')
     }, [getMyPosts])
 
@@ -89,6 +90,9 @@ function MyBlogs() {
                                 >
                                     <Box
                                         width={"70%"}
+                                        onClick={() => {
+                                            navigate(`/posts/${post.postId}`);
+                                        }}
                                     >
                                         <Typography
                                             variant="h6"
