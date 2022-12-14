@@ -28,7 +28,12 @@ function useAuth() {
             body: JSON.stringify({ username, email, password })
         })
         const data = await response.json();
-        appContext.storeLoginDetails(data.data);
+        appContext.loadUser({
+            userId: data.data._id,
+            username: data.data.username,
+            email: data.data.email,
+            accessToken: data.data.access_token
+        });
         navigate('/');
     }
 

@@ -37,7 +37,7 @@ function Navbar() {
             <Typography>Blogs</Typography>
             <Typography>About Me</Typography>
             {
-              appContext.username !== '' ? 
+              appContext.getAccessToken() !== null ? 
                 <>
                   <Button
                     color="secondary"
@@ -100,7 +100,7 @@ function Navbar() {
                             backgroundColor: "primary"
                           }
                         }}
-                        onClick={() => appContext.clearLoginDetails()}
+                        onClick={() => appContext.logout()}
                       >
                         Logout
                       </Typography>

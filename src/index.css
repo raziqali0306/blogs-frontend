@@ -26,3 +26,24 @@ code {
   opacity: 1;
 }
 
+/* skeleton animation */
+.skeleton-animate {
+  animation: shimmer 1.2s infinite linear;
+  background-image: linear-gradient(90deg, #e7edf1 0px, #f1f6fa 200px, #e7edf1 400px);
+  background-size: 1200px;
+}
+
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px;
+  }
+
+  50% {
+    background-position: 700px;
+  }
+
+  100% {
+    background-position: 700px;
+  }
+}

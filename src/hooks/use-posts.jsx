@@ -16,7 +16,7 @@ function usePosts() {
   }, []);
 
   const getMyPosts = useCallback(async () => {
-    const access_token = appContext.accessToken;
+    const access_token = appContext.getAccessToken();
     const response = await fetch(`${BASE_URL}/posts/myposts`, {
       method: "POST",
       headers: {
@@ -26,7 +26,7 @@ function usePosts() {
     });
     const data = await response.json();
     return data.data;
-  }, [appContext.accessToken]);
+  }, [appContext]);
 
   const getPostById = useCallback(async () => {
     const response = await fetch(`${BASE_URL}/posts/${id}`);
@@ -42,15 +42,15 @@ function usePosts() {
         },
         body: JSON.stringify({
           title, body, tags, 
-          author: appContext.userId
+          author: appContext.getUser().userId
           }),
     })
     const data = await response.json();
     navigate(`/posts/${data.data.postId}`)
-  }, [appContext.userId, navigate]);
+  }, [appContext, navigate]);
 
   const editPost = useCallback(async (title, body, tags) => {
-    const access_token = appContext.accessToken;
+    const access_token = appContext.getAccessToken();
     try {
       await fetch(`${BASE_URL}/posts/${id}`, {
           method: "PATCH",
@@ -59,15 +59,15 @@ function usePosts() {
           },
           body: JSON.stringify({title, body, tags, access_token}),
       })
-      navigate(`/posts/${id}`)
+      navigate(-1)
     }
     catch (err) {
       console.log(err);
     }
-  }, [appContext.accessToken, id, navigate]);
+  }, [appContext, id, navigate]);
   
   const deletePost = useCallback(async (postId = id) => {
-    const access_token = appContext.accessToken;
+    const access_token = appContext.getAccessToken();
     await fetch(`${BASE_URL}/posts/${postId}`, {
       method: "DELETE",
       headers: {
@@ -77,7 +77,7 @@ function usePosts() {
         access_token
       })
     })
-  }, [appContext.accessToken, id]);
+  }, [appContext, id]);
 
   const getTags = useCallback(async () => {
     const response = await fetch(`${BASE_URL}/posts/tags`);
