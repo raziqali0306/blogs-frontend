@@ -1,25 +1,33 @@
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Box, Stack, Typography } from "@mui/material";
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '../context/core';
 import usePosts from '../hooks/use-posts';
+import { resources } from '../resources/posts';
 import { StyledStack } from "./customComponents/styledComponents";
+
+const resource = resources();
 
 function MyBlogs() {
 
-    const { getMyPosts, deletePost } = usePosts();
+    const { deletePost } = usePosts();
     const navigate = useNavigate();
+    const appContext = useAppContext();
 
-    const [posts, setPosts] = useState([]);
+    // const [posts, setPosts] = useState([]);
+
+    const posts = resource.getMyposts.read();
 
     useEffect(() => {
-        (async () => {
-            setPosts(await getMyPosts());
-        })();
-        window.scrollTo(0, 0);
-        document.querySelector('.reveal.intro').classList.add('active')
-    }, [getMyPosts])
+        if (appContext.getAccessToken() === null) navigate('/sign');
+    //     (async () => {
+    //         setPosts(await getMyPosts());
+    //     })();
+    //     window.scrollTo(0, 0);
+        document.querySelector('.reveal.intro').classList.add('active');
+    }, [appContext, navigate])
 
     return (
         <Stack sx={{
@@ -42,6 +50,7 @@ function MyBlogs() {
                     </Stack>
                 </StyledStack>
             </Box>
+            {/* <Post /> */}
             {
                 posts?.length === 0 ?
                     <Box
@@ -69,8 +78,9 @@ function MyBlogs() {
                         }}
                     >
                         {
-                            posts?.map((post) => (
+                            posts?.map((post, index) => (
                                 <Box
+                                    key={index}
                                     flexDirection={'row'}
                                     sx={(theme) => ({
                                         display: "flex",
@@ -150,7 +160,6 @@ function MyBlogs() {
                                 </Box>
                             ))
                         }
-
                     </Stack>
             }
         </Stack>

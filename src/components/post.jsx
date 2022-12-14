@@ -76,7 +76,7 @@ function Post() {
           marginBottom={8}
         >
           {
-            appContext?.userId === post?.author ?
+            appContext.getUser().userId === post?.author ?
               <>
                 <Button
                   onClick={() => {
@@ -94,7 +94,7 @@ function Post() {
                 <Button
                   onClick={() => {
                     deletePost()
-                    navigate('/')
+                    navigate(-1)
                   }}
                   variant="contained"
                   sx={{

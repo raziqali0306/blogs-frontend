@@ -47,9 +47,11 @@ function CreateBlog({ blog }) {
 
     
     useEffect(() => {
-        if (appContext?.userId === '' || appContext?.userId === null) navigate('/sign');
+        if (appContext.getUser() === null) {
+            navigate('/sign')
+        }
         window.scrollTo(0, 0);
-    }, [appContext?.userId, navigate])
+    }, [appContext, navigate])
   
     return (
         <Stack
