@@ -26,7 +26,6 @@ function MyBlogs() {
     //         setPosts(await getMyPosts());
     //     })();
     //     window.scrollTo(0, 0);
-        document.querySelector('.reveal.intro').classList.add('active');
     }, [appContext, navigate])
 
     return (
@@ -37,7 +36,7 @@ function MyBlogs() {
             minHeight: "40vh",
             mb: "20vh",
         }}>
-            <Box mb={"2vh"} className="reveal intro">
+            <Box mb={"2vh"}>
                 <StyledStack>
                     <Stack sx={{
                         display: "flex",

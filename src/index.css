@@ -14,18 +14,6 @@ code {
     monospace;
 }
 
-.reveal {
-  position: relative;
-  transform: translateY(70px);
-  opacity: 0;
-  transition: all 0.1s ease;
-}
-
-.reveal.active {
-  transform: translateY(0px);
-  opacity: 1;
-}
-
 /* skeleton animation */
 .skeleton-animate {
   animation: shimmer 1.2s infinite linear;

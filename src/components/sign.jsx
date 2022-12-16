@@ -5,16 +5,11 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import sign from '../assests/sign.gif';
 import useAuth from '../hooks/use-auth';
 
 function Sign() {
-
-    useEffect(() => {        
-        document.querySelector('.reveal.intro').classList.add('active')
-    }, [])
-
     return (
         <Stack
             direction={'row'}
@@ -24,7 +19,6 @@ function Sign() {
             }}
             >
             <Box
-                className='reveal intro'
                 sx={{
                     width: '45vw',
                     display: "flex",

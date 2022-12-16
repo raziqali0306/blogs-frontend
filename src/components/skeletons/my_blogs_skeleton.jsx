@@ -12,7 +12,7 @@ function MyBlogsSkeleton() {
             minHeight: "40vh",
             mb: "20vh",
         }}>
-            <Box mb={"2vh"} className="reveal intro">
+            <Box mb={"2vh"}>
                 <StyledStack>
                     <Stack sx={{
                         display: "flex",

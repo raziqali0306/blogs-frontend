@@ -8,12 +8,14 @@ import {
   Typography
 } from "@mui/material";
 import { Stack } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import usePosts from "../../hooks/use-posts";
 import { StyledStack } from "../customComponents/styledComponents";
 import Posts from "../posts";
-import Collection from "./collections";
+import CollectionSkeleton from "../skeletons/collections_skeleton";
 import Intro from "./intro";
+
+const Collection = React.lazy(() => import('../home/collections'))
 
 const StyledContainer = styled(Box)(({ theme }) => ({
   paddingBottom: "10vh",
@@ -42,7 +44,6 @@ export default function Home() {
     (async () => {
       setPosts(await getAllPosts());
     })();
-    document.querySelector('.reveal.intro').classList.add('active')
   }, [getAllPosts]);
 
   return (
@@ -57,20 +58,21 @@ export default function Home() {
           maxWidth="lg"
           mx="auto"
         >
-          <StyledContainer className="reveal intro">
+          <StyledContainer>
             <Intro />
           </StyledContainer>
-          <Collection
-            setSelectedTag={setSelectedTag}
-            selectedTag={selectedTag}
-          />
+          <Suspense fallback={<CollectionSkeleton />}>
+            <Collection
+              setSelectedTag={setSelectedTag}
+              selectedTag={selectedTag}
+            />
+          </Suspense>
         </Stack>
       </Box>
       <Box
         maxWidth="lg"
         mx="auto"
         marginBottom={"100px"}
-        className="reveal"
       >
         <StyledStack>
           <Stack

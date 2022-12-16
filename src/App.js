@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import CreateBlog from './components/create';
 import Edit from './components/edit';
@@ -14,26 +14,6 @@ import AppWrapper from './context/core';
 const MyBlogs = lazy(() => import('./components/my_blogs'));
 
 function App() {
-
-  useEffect(() => {
-    window.addEventListener('scroll', () => {
-      var reveals = document.querySelectorAll('.reveal');
-      let windowHeight = window.innerHeight;
-      for (let i = 0; i < reveals.length; i++) {
-        let revealTop = reveals[i].getBoundingClientRect().top;
-        let revealPoint = 70;
-
-        if (revealTop < windowHeight - revealPoint) {
-          reveals[i].classList.add('active');
-        }
-        else {
-          reveals[i].classList.remove('active');
-        }
-      }
-    })
-    window.scrollTo(0, 0);
-  }, [])
-
   return (
     <AppWrapper>
       <Navbar />
@@ -51,7 +31,7 @@ function App() {
           } />
         </Routes>
       </Box>
-      <Box className='reveal'>
+      <Box>
         <Footer />
       </Box>
     </AppWrapper>
